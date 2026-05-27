@@ -12,9 +12,10 @@ typedef struct {
 
 float ortalama_hesapla(float notlar[], int n) {
     float toplam = 0;
-    for (int i = 0; i < n; i++)
+    for (int i = 0; i < n; i++) {
         toplam += notlar[i];
-    return toplam / n;
+    }
+    return toplam / n; 
 }
 
 const char* harf_notu(float ort) {
@@ -28,32 +29,37 @@ const char* harf_notu(float ort) {
 
 int main() {
     Ogrenci ogrenciler[MAX_OGRENCI];
-    int sayi = 3;
+    int ogrenci_sayisi;
 
-    // Örnek veri
-    strcpy(ogrenciler[0].ad, "Ahmet Yılmaz");
-    ogrenciler[0].numara = 2021001;
-    float n0[] = {85, 90, 78, 92, 88};
-    memcpy(ogrenciler[0].notlar, n0, sizeof(n0));
+    printf("Kac ogrenci gireceksiniz? (Maksimum %d): ", MAX_OGRENCI);
+    scanf("%d", &ogrenci_sayisi);
+    
+    while (getchar() != '\n'); 
 
-    strcpy(ogrenciler[1].ad, "Zeynep Kaya");
-    ogrenciler[1].numara = 2021002;
-    float n1[] = {70, 65, 72, 68, 75};
-    memcpy(ogrenciler[1].notlar, n1, sizeof(n1));
+    for (int i = 0; i < ogrenci_sayisi; i++) {
+        printf("\n--- %d. Ogrenci Bilgileri ---\n", i + 1);
+        
+        printf("Ad Soyad: ");
+        // fgets kullanarak boşluklu isimleri de (örn: Ahmet Yılmaz) güvenle alabiliyoruz
+        fgets(ogrenciler[i].ad, sizeof(ogrenciler[i].ad), stdin);
+        // fgets'in sonuna eklediği yeni satır (\n) karakterini temizliyoruz
+        ogrenciler[i].ad[strcspn(ogrenciler[i].ad, "\n")] = 0;
 
-    strcpy(ogrenciler[2].ad, "Murat Demir");
-    ogrenciler[2].numara = 2021003;
-    float n2[] = {45, 55, 50, 48, 52};
-    memcpy(ogrenciler[2].notlar, n2, sizeof(n2));
+        printf("Numara: ");
+        scanf("%d", &ogrenciler[i].numara);
 
-    printf("%-20s %-10s %-10s %-5s\n",
-           "Ad Soyad", "Numara", "Ortalama", "Harf");
-    printf("%-20s %-10s %-10s %-5s\n",
-           "--------", "-------", "--------", "----");
+        printf("5 adet notu aralarında bosluk birakarak giriniz: ");
+        for (int j = 0; j < 5; j++) {
+            scanf("%f", &ogrenciler[i].notlar[j]);
+        }
+        
+        while (getchar() != '\n'); 
+        ogrenciler[i].ortalama = ortalama_hesapla(ogrenciler[i].notlar, 5);
+    }
+    printf("\n%-20s %-10s %-10s %-5s\n", "Ad Soyad", "Numara", "Ortalama", "Harf");
+    printf("%-20s %-10s %-10s %-5s\n", "--------", "------", "--------", "----");
 
-    for (int i = 0; i < sayi; i++) {
-        ogrenciler[i].ortalama =
-            ortalama_hesapla(ogrenciler[i].notlar, 5);
+    for (int i = 0; i < ogrenci_sayisi; i++) {
         printf("%-20s %-10d %-10.2f %-5s\n",
                ogrenciler[i].ad,
                ogrenciler[i].numara,
