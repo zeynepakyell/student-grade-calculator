@@ -66,6 +66,67 @@ int main() {
                ogrenciler[i].ortalama,
                harf_notu(ogrenciler[i].ortalama));
     }
+    FILE *dosya = fopen("ogrenciler.txt", "w");
+    
+    if (dosya == NULL) {
+        printf("\nHata: Dosya olusturulamadi!\n");
+        return 1;
+    }
 
+    // Dosyanın içine başlıkları yazdırıyoruz
+    fprintf(dosya, "%-20s %-10s %-10s %-5s\n", "Ad Soyad", "Numara", "Ortalama", "Harf");
+    fprintf(dosya, "%-20s %-10s %-10s %-5s\n", "--------", "------", "--------", "----");
+
+    // Öğrenci verilerini döngüyle dosyanın içine satır satır basıyoruz
+    for (int i = 0; i < ogrenci_sayisi; i++) {
+        fprintf(dosya, "%-20s %-10d %-10.2f %-5s\n",
+                ogrenciler[i].ad,
+                ogrenciler[i].numara,
+                ogrenciler[i].ortalama,
+                harf_notu(ogrenciler[i].ortalama));
+    }
+    FILE *dosya = fopen("ogrenciler.txt", "w");
+    
+    if (dosya == NULL) {
+        printf("\nHata: Dosya olusturulamadi!\n");
+        return 1;
+    }
+
+    // Dosyanın içine başlıkları yazdırıyoruz
+    fprintf(dosya, "%-20s %-10s %-10s %-5s\n", "Ad Soyad", "Numara", "Ortalama", "Harf");
+    fprintf(dosya, "%-20s %-10s %-10s %-5s\n", "--------", "------", "--------", "----");
+
+    // Öğrenci verilerini döngüyle dosyanın içine satır satır basıyoruz
+    for (int i = 0; i < ogrenci_sayisi; i++) {
+        fprintf(dosya, "%-20s %-10d %-10.2f %-5s\n",
+                ogrenciler[i].ad,
+                ogrenciler[i].numara,
+                ogrenciler[i].ortalama,
+                harf_notu(ogrenciler[i].ortalama));
+    }
+
+    FILE *dosya = fopen("ogrenciler.txt", "w");
+    
+    if (dosya == NULL) {
+        printf("\nHata: Dosya olusturulamadi!\n");
+        return 1;
+    }
+
+    fprintf(dosya, "%-20s %-10s %-10s %-5s\n", "Ad Soyad", "Numara", "Ortalama", "Harf");
+    fprintf(dosya, "%-20s %-10s %-10s %-5s\n", "--------", "------", "--------", "----");
+
+    for (int i = 0; i < ogrenci_sayisi; i++) {
+        fprintf(dosya, "%-20s %-10d %-10.2f %-5s\n",
+                ogrenciler[i].ad,
+                ogrenciler[i].numara,
+                ogrenciler[i].ortalama,
+                harf_notu(ogrenciler[i].ortalama));
+    }
+    
+    fclose(dosya); 
+    printf("\nVeriler 'ogrenciler.txt' dosyasina basariyla kaydedildi!\n");
+
+    return 0;
+    
     return 0;
 }
